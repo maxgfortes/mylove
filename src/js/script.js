@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.3 // Aumentado para garantir que detecte melhor
+        threshold: 0.3 
     };
 
     const observer = new IntersectionObserver((entries, observer) => {
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (entry.target.id === 'final') {
                     console.log("Seção final detectada! Iniciando sequência...");
                     startFinalSequence();
-                    observer.unobserve(entry.target); // Para de observar após ativar
+                    observer.unobserve(entry.target); 
                 }
             }
         });
@@ -48,40 +48,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startFinalSequence() {
-    console.log("Sequência final iniciada!");
-    
-    // Para a intro se ainda estiver tocando
-    if (introAudio && !introAudio.paused) {
-        introAudio.pause();
-        introAudio.currentTime = 0;
-    }
+        console.log("Sequência final iniciada!");
 
-    // Toca a música final
-    if (finalAudio) {
-        finalAudio.play().catch(err => console.log("Áudio final bloqueado:", err));
-    }
+        // 🚫 Não pausa mais o introAudio, só deixa rolar
 
-    // Espera 8 segundos antes de ativar o fade
-    setTimeout(() => {
-        if (fadeToBlack) {
-            console.log("Ativando fade to black...");
-            fadeToBlack.classList.add('active');
-
-            // Mostra a citação final após mais 4 segundos
-            setTimeout(() => {
-                if (finalQuote) {
-                    console.log("Mostrando citação final...");
-                    finalQuote.classList.add('show');
-                }
-            }, 4000);
+        // ✅ Só inicia o áudio final
+        if (finalAudio) {
+            finalAudio.loop = true; // Mantém tocando mesmo após sessão
+            finalAudio.play().catch(err => console.log("Áudio final bloqueado:", err));
         }
-    }, 6000); // ⬅️ delay de 8 segundos
-}
 
+        // Espera 8 segundos antes de ativar o fade
+        setTimeout(() => {
+            if (fadeToBlack) {
+                console.log("Ativando fade to black...");
+                fadeToBlack.classList.add('active');
 
-    // Função de debug para testar manualmente
+                // Mostra a citação final após mais 4 segundos
+                setTimeout(() => {
+                    if (finalQuote) {
+                        console.log("Mostrando citação final...");
+                        finalQuote.classList.add('show');
+                    }
+                }, 4000);
+            }
+        }, 6000); 
+    }
+
+    // Função de debug
     window.testFinalSequence = startFinalSequence;
-    
+
     // Log para debug
     console.log("Script carregado. Elementos encontrados:");
     console.log("fadeToBlack:", fadeToBlack);
