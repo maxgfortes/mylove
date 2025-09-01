@@ -1,0 +1,401 @@
+/* Configurações Globais e Fontes */
+body {
+    margin: 0;
+    background-color: #000;
+    color: #feda4a;
+    font-family: 'Saira', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Efeito de vinheta nas bordas da tela */
+.vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.9);
+    pointer-events: none; /* Permite clicar através da vinheta */
+    z-index: 100;
+}
+
+/* Seção 1: Intro Star Wars */
+/* Seção 1: Intro Star Wars - EFEITO PERSPECTIVA CORRETO */
+#intro {
+    height: 100vh;
+    background-image: url('./src/bg/starwars-intro.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
+    position: relative;
+}
+
+.fade {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background: linear-gradient(
+        0deg,
+        #000 0%,
+        transparent 25%,
+        transparent 75%,
+        #000 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+}
+
+.star-wars {
+    position: absolute; /* VOLTA para absolute */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 2;
+    /* REMOVE todas as propriedades de texto daqui */
+}
+
+.crawl {
+    position: relative;
+    top: 100%; /* COMEÇA EMBAIXO DA TELA */
+    width: 18em; /* LARGURA FIXA CRUCIAL */
+    margin: 0 auto;
+    
+    /* PROPRIEDADES DE TEXTO AQUI */
+    color: #feda4a;
+    font-family: 'Pathway Gothic One', sans-serif;
+    font-size: 350%;
+    font-weight: 600;
+    letter-spacing: 4px;
+    line-height: 1.4;
+    text-align: justify;
+    
+    /* PERSPECTIVA FIXA */
+    transform-origin: 50% 100%;
+    transform: rotateX(25deg); /* ROTAÇÃO FIXA */
+    
+    /* ANIMAÇÃO DE MOVIMENTO */
+    animation: crawl 40s linear infinite;
+}
+
+.crawl > .title {
+    font-size: 90%;
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.crawl > .title p {
+    margin: 0 0 1em;
+    text-transform: uppercase;
+    font-size: 80%;
+}
+
+.crawl > .title h1 {
+    margin: 0 0 2em;
+    text-transform: uppercase;
+    font-size: 100%;
+}
+
+.crawl p {
+    margin: 0 0 1.5em;
+    text-indent: 1em;
+    font-size: 80%;
+}
+
+/* ANIMAÇÃO CORRIGIDA - APENAS MOVIMENTO VERTICAL */
+@keyframes crawl {
+    0% {
+        top: 100%;
+        opacity: 1;
+    }
+    100% {
+        top: -200%;
+        opacity: 0;
+    }
+}
+
+/* VERSÃO ALTERNATIVA COM MAIS EFEITO 3D */
+@keyframes crawl-3d {
+    0% {
+        top: 100%;
+        transform: rotateX(25deg) translateZ(0px);
+        opacity: 1;
+    }
+    100% {
+        top: -200%;
+        transform: rotateX(25deg) translateZ(-1500px);
+        opacity: 0;
+    }
+}
+
+/* Para usar a versão 3D, mude a animação para: */
+/* animation: crawl-3d 40s linear infinite; */
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    #intro {
+        perspective: 200px; /* Perspectiva menor para mobile */
+    }
+    
+    .crawl {
+        width: 16em;
+        font-size: 250%;
+        letter-spacing: 2px;
+    }
+    
+    .crawl > .title p {
+        font-size: 70%;
+    }
+    
+    .crawl p {
+        font-size: 70%;
+    }
+}
+
+@media (max-width: 480px) {
+    .crawl {
+        width: 14em;
+        font-size: 200%;
+        letter-spacing: 1px;
+    }
+}
+
+        .crawl-container {
+            perspective: 400px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 20%;
+        }
+
+                .crawl-text {
+            font-size: 2rem;
+            color: #FFD700;
+            text-align: center;
+            transform: rotateX(25deg);
+            animation: crawl 15s linear infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        @keyframes crawl {
+            0% {
+                transform: rotateX(25deg) translateY(150vh);
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            95% {
+                opacity: 1;
+            }
+            100% {
+                transform: rotateX(25deg) translateY(-150vh);
+                opacity: 0;
+            }
+        }
+
+/* Seção 2: Anakin e Padmé */
+#anakin-padme {
+    padding: 10vh 5%;
+    background-color: #050505;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container {
+    position: relative;
+    width: 80%;
+    max-width: 900px;
+}
+
+.image-container img {
+    width: 100%;
+    border-radius: 10px;
+    filter: brightness(0.6);
+}
+
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+    width: 80%;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 5px;
+    backdrop-filter: blur(5px);
+}
+.text-overlay h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #feda4a;
+}
+.text-overlay p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+/* Seção 3: Declarações */
+#declarations {
+ padding: 10vh 0;
+ background-image: url('./src/bg/anakin-padme.jpg'); /* Substitua pelo caminho da sua imagem */
+ background-size: cover;
+ background-position: center;
+ background-attachment: fixed; /* Opcional: Efeito paralaxe */
+ position: relative;
+}
+.declaration-container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+}
+.declaration {
+    padding: 2rem;
+    border: 1px solid #feda4a;
+    border-radius: 8px;
+    width: 50%;
+    color: #eee;
+}
+.declaration h3 {
+    font-size: 2rem;
+    color: #feda4a;
+    margin-top: 0;
+}
+.declaration.left {
+    align-self: flex-start;
+}
+.declaration.right {
+    align-self: flex-end;
+    text-align: right;
+    border-color: #ff9d9d; /* Cor alternativa para variar */
+}
+.declaration.right h3 {
+    color: #ff9d9d;
+}
+
+/* Seção 4: Final */
+#final {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 10%;
+    background: radial-gradient(circle, #1a1a1a 0%, #000000 100%);
+}
+.final-text {
+    max-width: 800px;
+}
+.final-text h2 {
+    font-size: 3rem;
+    color: #feda4a;
+}
+.final-text p {
+    font-size: 1.5rem;
+    line-height: 1.7;
+    color: #fff;
+}
+
+/* Overlay do Final */
+#fade-to-black {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 99;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 5s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#fade-to-black.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+#final-quote {
+    color: #fff;
+    font-size: 2rem;
+    font-family: 'Saira', sans-serif;
+    opacity: 0;
+    transition: opacity 3s ease-in 4s; /* Fade in após 4s */
+}
+#final-quote.show {
+    opacity: 1;
+}
+
+/* Animações de Scroll */
+.animatable {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.animatable.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.declaration.left.animatable { transform: translateX(-50px); }
+.declaration.right.animatable { transform: translateX(50px); }
+.declaration.animatable.visible { transform: translateX(0); }
+
+
+
+
+
+
+/* Pré-tela de início */
+#pre-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    color: #cacaca;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 200;
+}
+
+#pre-screen h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+#start-button {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background: transparent;
+    border: 1px solid #cacaca;
+    color: #cacaca;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#start-button:hover {
+    transform: scale(1.05);
+}
